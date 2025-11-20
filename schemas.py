@@ -1,48 +1,46 @@
 """
-Database Schemas
+Database Schemas for the Print Studio App
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Each Pydantic model represents a collection in MongoDB. The collection name
+is the lowercase class name.
 """
+from typing import Optional, List, Literal
+from pydantic import BaseModel, Field, EmailStr
 
-from pydantic import BaseModel, Field
-from typing import Optional
-
-# Example schemas (replace with your own):
-
+# Core user (kept from template for reference)
 class User(BaseModel):
-    """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
-    """
     name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
+    email: EmailStr = Field(..., description="Email address")
+    address: Optional[str] = Field(None, description="Address")
     age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
     is_active: bool = Field(True, description="Whether user is active")
 
-class Product(BaseModel):
-    """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
-    """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
+# Services offered by the print studio (t-shirts, tote bags, hoodies, etc.)
+class Service(BaseModel):
+    key: str = Field(..., description="Machine-readable unique key, e.g., 'tshirt' or 'tote_bag'")
+    name: str = Field(..., description="Public name of the service")
+    description: Optional[str] = Field(None, description="Short description")
+    base_price: float = Field(..., ge=0, description="Base price per unit in USD")
+    categories: List[str] = Field(default_factory=list, description="Tags/categories")
+    color_price_per_color: float = Field(0.2, ge=0, description="Additional price per color layer")
+    print_area_multiplier: float = Field(1.0, ge=0.1, description="Multiplier for larger print areas")
+    minimum_quantity: int = Field(1, ge=1, description="Minimum order quantity")
 
-# Add your own schemas here:
-# --------------------------------------------------
+# Quote request submitted by a customer
+class QuoteRequest(BaseModel):
+    customer_name: str = Field(..., min_length=2)
+    customer_email: EmailStr
+    service_key: str = Field(..., description="Which service is requested, e.g., 'tshirt'")
+    quantity: int = Field(..., ge=1, le=100000)
+    colors: int = Field(1, ge=1, le=10, description="Number of print colors")
+    print_area: Literal['small','medium','large'] = 'medium'
+    notes: Optional[str] = None
+    estimated_total: Optional[float] = Field(None, ge=0)
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+# Orders (optional for this MVP)
+class Order(BaseModel):
+    quote_id: Optional[str] = Field(None, description="Associated quote document id")
+    service_key: str
+    quantity: int
+    total_price: float
+    status: Literal['pending','confirmed','in_production','completed','cancelled'] = 'pending'
