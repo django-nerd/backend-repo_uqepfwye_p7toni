@@ -1,19 +1,19 @@
 INFO:     Will watch for changes in these directories: ['/home/workspace']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [201] using StatReload
-INFO:     Started server process [203]
+INFO:     Started reloader process [249] using StatReload
+INFO:     Started server process [251]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.20.0.1:43890 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-INFO:     172.20.0.1:43910 - "POST /price HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:43898 - "POST /price HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:43924 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43924 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43898 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43898 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43910 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43940 - "POST /price HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:43924 - "POST /price HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:43910 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43910 - "GET /services HTTP/1.1" 200 OK
-INFO:     172.20.0.1:43910 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34598 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:34608 - "POST /price HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:34612 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34612 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34624 - "POST /price HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:34612 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34612 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34626 - "POST /price HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:34626 - "POST /price HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:53314 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:53314 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:53314 - "GET /services HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34626 - "GET /services HTTP/1.1" 200 OK
